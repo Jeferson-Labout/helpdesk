@@ -1,5 +1,8 @@
 package com.jefson.apihelpdesk.services;
 
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.List;
 import java.util.Optional;
 
@@ -38,8 +41,10 @@ public class TecnicoService {
 	}
 
 	public Tecnico create(TecnicoDTO objDTO) {
+		LocalDate today = LocalDate.ofInstant(Instant.now(), ZoneId.systemDefault());
 		objDTO.setId(null);
 		objDTO.setSenha(encoder.encode(objDTO.getSenha()));
+		objDTO.setDataCriacao(today);
 		validaPorCpfEEmail(objDTO);
 		Tecnico newObj = new Tecnico(objDTO);
 		return repository.save(newObj);
