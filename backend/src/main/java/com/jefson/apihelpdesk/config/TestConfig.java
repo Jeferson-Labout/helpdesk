@@ -10,14 +10,13 @@ import com.jefson.apihelpdesk.services.DBService;
 @Configuration
 @Profile("test")
 public class TestConfig {
-	
+
 	@Autowired
 	private DBService dbService;
 	
 	@Bean
-	public void instaciaDb() {
-		this.dbService.instaciaDB();
-		
+	public void instanciaDB() {
+		this.dbService.instanciaDB();
 	}
-
 }
+

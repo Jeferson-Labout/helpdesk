@@ -17,7 +17,7 @@ export class TecnicoService {
   }
 
   create(tecnico:Tecnico):Observable<Tecnico> {
-console.log(tecnico);
+
     return this.http.post<Tecnico>(`${API_CONFIG.baseUrl}/tecnicos`, tecnico);
   }
 }
