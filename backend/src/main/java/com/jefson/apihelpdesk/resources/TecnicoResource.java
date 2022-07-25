@@ -1,6 +1,7 @@
 package com.jefson.apihelpdesk.resources;
 
 import java.net.URI;
+import java.util.List;
 import java.util.stream.Collectors;
 
 import javax.validation.Valid;
@@ -37,9 +38,9 @@ public class TecnicoResource {
 	}
 
 	@GetMapping
-	public ResponseEntity<java.util.List<TecnicoDTO>> findAll() {
-		java.util.List<Tecnico> list = service.findAll();
-		java.util.List<TecnicoDTO> listDTO = list.stream().map(obj -> new TecnicoDTO(obj)).collect(Collectors.toList());
+	public ResponseEntity<List<TecnicoDTO>> findAll() {
+		List<Tecnico> list = service.findAll();
+		List<TecnicoDTO> listDTO = list.stream().map(obj -> new TecnicoDTO(obj)).collect(Collectors.toList());
 		return ResponseEntity.ok().body(listDTO);
 	}
 	@PreAuthorize("hasAnyRole('ADMIN')")

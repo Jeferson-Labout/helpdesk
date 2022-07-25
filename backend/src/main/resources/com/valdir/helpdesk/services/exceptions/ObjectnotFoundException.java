@@ -1,4 +1,4 @@
-package com.jefson.apihelpdesk.services.exceptions;
+package com.valdir.helpdesk.services.exceptions;
 
 public class ObjectnotFoundException extends RuntimeException {
 	private static final long serialVersionUID = 1L;
