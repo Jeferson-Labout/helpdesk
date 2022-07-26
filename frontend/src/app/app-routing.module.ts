@@ -4,6 +4,7 @@ import { AuthGuard } from './auth/auth.guard';
 import { HomeComponent } from './components/home/home.component';
 import { LoginComponent } from './components/login/login.component';
 import { NavComponent } from './components/nav/nav.component';
+import { TecnicoUpdateComponent } from './components/tecnico-update/tecnico-update.component';
 import { TecnicoCreateComponent } from './components/tecnico/tecnico-create/tecnico-create.component';
 import { TecnicoListComponent } from './components/tecnico/tecnico-list/tecnico-list.component';
 
@@ -15,7 +16,7 @@ const routes: Routes = [
       // Rota de técnicos
       { path: 'tecnicos', component: TecnicoListComponent },
       { path: 'tecnicos/create', component: TecnicoCreateComponent },
-      { path: 'tecnicos/update/:id', component: TecnicoCreateComponent }
+      { path: 'tecnicos/update/:id', component: TecnicoUpdateComponent }
     ]
   }
 ];

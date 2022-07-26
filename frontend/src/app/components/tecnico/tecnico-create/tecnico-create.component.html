@@ -41,12 +41,11 @@
 
     </mat-form-field>
 
-    <button (click)="submitForm()" [disabled]="!validaCampos()" class="full-width mat-elevation-z4" mat-flat-button
-      color="primary">Salvar</button>
-    <button *ngIf="currentAction=='create'" mat-flat-button routerLink="../" class="full-width mat-elevation-z4"
+    <button (click)="create()" [disabled]="!validaCampos()" class="full-width mat-elevation-z4" mat-flat-button
+      color="primary">Cadastrar</button>
+    <button  mat-flat-button routerLink="../" class="full-width mat-elevation-z4"
       color="warn">Cancelar</button>
-    <button *ngIf="currentAction=='update'" mat-flat-button routerLink="../../" class="full-width mat-elevation-z4"
-      color="warn">Cancelar</button>
+   
 
     <p>by Jeferson Labout</p>
 

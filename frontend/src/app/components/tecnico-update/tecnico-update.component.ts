@@ -6,11 +6,11 @@ import { Tecnico } from 'src/app/models/tecnico';
 import { TecnicoService } from 'src/app/services/tecnico.service';
 
 @Component({
-  selector: 'app-tecnico-create',
-  templateUrl: './tecnico-create.component.html',
-  styleUrls: ['./tecnico-create.component.css']
+  selector: 'app-tecnico-update',
+  templateUrl: './tecnico-update.component.html',
+  styleUrls: ['./tecnico-update.component.css']
 })
-export class TecnicoCreateComponent implements OnInit {
+export class TecnicoUpdateComponent implements OnInit {
 
   tecnico: Tecnico = {
     id:         '',
@@ -35,14 +35,22 @@ export class TecnicoCreateComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-
+    this.tecnico.id = this.route.snapshot.paramMap.get('id');
+    this.findById();
   }
-  
+  findById(): void {
+    this.service.findById(this.tecnico.id).subscribe(resposta => {
+      resposta.perfis = []
+      
+      this.tecnico = resposta;
+    })
+  }
  
 
-  create(): void {
-    this.service.create(this.tecnico).subscribe(resposta => {
-      this.toast.success('Técnico cadastrado com sucesso', 'Cadastro');
+  
+  update(): void {
+    this.service.update(this.tecnico).subscribe(resposta => {
+      this.toast.success('Técnico Atualizado com sucesso', 'Update');
       this.router.navigate(['tecnicos'])
     }, ex => {
       if (ex.error.errors) {
@@ -57,8 +65,6 @@ export class TecnicoCreateComponent implements OnInit {
 
     })
   }
-
-  
 
   addPerfil(perfil: any): void {
     this.tecnico.perfis.includes(perfil) ? this.tecnico.perfis.splice(this.tecnico.perfis.indexOf(perfil), 1) : this.tecnico.perfis.push(perfil);
