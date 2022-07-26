@@ -12,9 +12,10 @@ const routes: Routes = [
   {
     path: '', component: NavComponent, canActivate: [AuthGuard], children: [
       { path: 'home', component: HomeComponent },
-            // Rota de técnicos
-      { path: 'tecnicos', component: TecnicoListComponent},
-      { path: 'tecnicos/create', component: TecnicoCreateComponent}
+      // Rota de técnicos
+      { path: 'tecnicos', component: TecnicoListComponent },
+      { path: 'tecnicos/create', component: TecnicoCreateComponent },
+      { path: 'tecnicos/update/:id', component: TecnicoCreateComponent }
     ]
   }
 ];
