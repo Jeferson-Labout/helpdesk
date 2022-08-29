@@ -19,27 +19,30 @@ export class TecnicoCreateComponent implements OnInit {
 
   }
 
-  nome: FormControl = new FormControl(null, Validators.minLength(3));
-  cpf: FormControl = new FormControl(null, Validators.required);
-  email: FormControl = new FormControl(null, Validators.email);
-  senha: FormControl = new FormControl(null, Validators.minLength(3));
+
   constructor(
     private service: TecnicoService
     , private toast: ToastrService
     , private router: Router
     , private route: ActivatedRoute
-    , private formBuilder: FormBuilder
-  ) { }
+    , private fb: FormBuilder
+  ) { this.criarFormulario(); }
 
   ngOnInit(): void {
     this.setCurrentAction();
-    this.buildTecnicoForm();
+
     this.findById();
+
   }
   findById(): void {
     this.tecnico.id = this.route.snapshot.paramMap.get('id');
     this.service.findById(this.tecnico.id).subscribe(resposta => {
       this.tecnico = resposta;
+      this.tecnico.perfis = [];
+      this.tecnicoForm.setValue(this.tecnico)
+
+
+
     })
   }
   submitForm() {
@@ -87,10 +90,15 @@ export class TecnicoCreateComponent implements OnInit {
   }
 
   addPerfil(perfil: any): void {
-    this.tecnico.perfis.includes(perfil) ? this.tecnico.perfis.splice(this.tecnico.perfis.indexOf(perfil), 1) : this.tecnico.perfis.push(perfil);
+    if (this.tecnico.perfis.includes(perfil)) {
+      this.tecnico.perfis.splice(this.tecnico.perfis.indexOf(perfil), 1);
+    } else {
+      this.tecnico.perfis.push(perfil);
+    }
+
   }
   validaCampos(): boolean {
-    return this.nome.valid && this.cpf.valid && this.email.valid && this.senha.valid
+    return this.tecnico_nome.value.valid && this.tecnico_cpf.value.valid && this.tecnico_email.value.valid && this.tecnico_senha.value.valid
   }
 
   private setCurrentAction() {
@@ -100,15 +108,22 @@ export class TecnicoCreateComponent implements OnInit {
 
   }
 
-  private buildTecnicoForm() {
-    this.tecnicoForm = this.formBuilder.group({
-      id: '',
-      nome: '',
-      cpf: '',
-      email: '',
-      senha: '',
+  criarFormulario() {
+    this.tecnicoForm = this.fb.group({
+      id: [0],
+      nome: ['', [Validators.minLength(3)]],
+      cpf: ['', [Validators.required]],
+      email: ['', [Validators.email]],
+      senha: ['', [Validators.minLength(3)]],
       perfis: [],
-      dataCriacao: ''
+      dataCriacao: ['']
+
+
     })
   }
+  get tecnico_nome() { return this.tecnicoForm.get("nome") as FormControl };
+  get tecnico_cpf() { return this.tecnicoForm.get("cpf") as FormControl };
+  get tecnico_email() { return this.tecnicoForm.get("email") as FormControl };
+  get tecnico_senha() { return this.tecnicoForm.get("senha") as FormControl };
+
 }
