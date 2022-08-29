@@ -15,7 +15,8 @@ const routes: Routes = [
       // Rota de técnicos
       { path: 'tecnicos', component: TecnicoListComponent },
       { path: 'tecnicos/create', component: TecnicoCreateComponent },
-      { path: 'tecnicos/update/:id', component: TecnicoCreateComponent }
+      { path: 'tecnicos/update/:id', component: TecnicoCreateComponent },
+      { path: 'tecnicos/delete/:id', component: TecnicoCreateComponent }
     ]
   }
 ];

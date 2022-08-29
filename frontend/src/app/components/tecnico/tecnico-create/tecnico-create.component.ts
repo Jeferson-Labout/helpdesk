@@ -30,8 +30,10 @@ export class TecnicoCreateComponent implements OnInit {
 
   ngOnInit(): void {
     this.setCurrentAction();
-
-    this.findById();
+    if( this.route.snapshot.url[1].path == 'update' ||this.route.snapshot.url[1].path == 'delete'){
+  
+      this.findById();
+     }
 
   }
   findById(): void {
@@ -40,9 +42,6 @@ export class TecnicoCreateComponent implements OnInit {
       this.tecnico = resposta;
       this.tecnico.perfis = [];
       this.tecnicoForm.setValue(this.tecnico)
-
-
-
     })
   }
   submitForm() {
@@ -103,8 +102,14 @@ export class TecnicoCreateComponent implements OnInit {
 
   private setCurrentAction() {
     // this.tecnico.id = this.route.snapshot.paramMap.get('id');
-    this.route.snapshot.url[1].path == 'update' ? this.currentAction = 'update' : this.currentAction = 'create'
+   if( this.route.snapshot.url[1].path == 'create'){
+    this.currentAction = 'create'
 
+   }
+   
+    // this.route.snapshot.url[1].path == 'update' ? this.currentAction = 'update' : this.currentAction == 'create'? this.currentAction = 'create' : this.currentAction = 'delete';
+
+console.log( this.route.snapshot.url[1].path)
 
   }
 
