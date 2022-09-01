@@ -53,7 +53,7 @@ export class TecnicoCreateComponent implements OnInit {
 
     if (this.currentAction == "create")
       this.create();
-    else 
+    else
       this.update();
   }
 
@@ -78,6 +78,7 @@ export class TecnicoCreateComponent implements OnInit {
   }
 
   update(): void {
+    this.tecnico = this.tecnicoForm.value
     this.service.update(this.tecnico).subscribe(resposta => {
       this.toast.success('Técnico Atualizado com sucesso', 'Update');
       this.router.navigate(['tecnicos'])
@@ -130,7 +131,7 @@ export class TecnicoCreateComponent implements OnInit {
   }
 
   private setCurrentAction() {
-    this.currentAction = this.route.snapshot.url[1].path   
+    this.currentAction = this.route.snapshot.url[1].path
   }
 
   criarFormulario() {

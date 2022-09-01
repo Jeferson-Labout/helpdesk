@@ -78,6 +78,7 @@ export class ClienteCreateComponent implements OnInit {
   }
 
   update(): void {
+    this.cliente = this.clienteForm.value
     this.service.update(this.cliente).subscribe(resposta => {
       this.toast.success('Cliente Atualizado com sucesso', 'Update');
       this.router.navigate(['clientes'])

@@ -10,4 +10,5 @@ export interface Chamado {
    cliente?: any;
    nomeCliente?: string;
    nomeTecnico?: string;
+  
 }

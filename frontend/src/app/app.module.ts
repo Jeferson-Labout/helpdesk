@@ -36,11 +36,12 @@ import { ToastrModule } from 'ngx-toastr';
 import { AuthInterceptorProvider } from './interceptors/auth.interceptor';
 import { TecnicoCreateComponent } from './components/tecnico/tecnico-create/tecnico-create.component';
 import { NgxMaskModule } from 'ngx-mask';
-
+import { DialogModule } from 'primeng/dialog';
 import { ClienteListComponent } from './components/cliente/cliente-list/cliente-list.component';
 import { ClienteCreateComponent } from './components/cliente/cliente-create/cliente-create.component';
 import { ChamadoListComponent } from './components/chamado/chamado-list/chamado-list.component';
 import { ChamadoCreateComponent } from './components/chamado/chamado-create/chamado-create.component';
+import { ButtonModule } from 'primeng/button';
 
 @NgModule({
   declarations: [
@@ -80,6 +81,8 @@ import { ChamadoCreateComponent } from './components/chamado/chamado-create/cham
     MatIconModule,
     MatListModule,
     MatCardModule,
+    DialogModule,
+    ButtonModule,
     ToastrModule.forRoot({
       timeOut: 4000,
       closeButton: true,

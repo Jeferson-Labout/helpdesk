@@ -13,7 +13,7 @@ export class ChamadoListComponent implements OnInit {
 
   ELEMENT_DATA: Chamado[] = []
   FILTERED_DATA: Chamado[] = []
-
+  modalChamado: boolean;
   displayedColumns: string[] = ['id', 'titulo', 'cliente', 'tecnico', 'dataAbertura', 'prioridade', 'status', 'acoes'];
   dataSource = new MatTableDataSource<Chamado>(this.ELEMENT_DATA);
 
@@ -34,7 +34,9 @@ export class ChamadoListComponent implements OnInit {
       this.dataSource.paginator = this.paginator;
     })
   }
-
+  showModalChamado() {
+    this.modalChamado = true;
+}
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();

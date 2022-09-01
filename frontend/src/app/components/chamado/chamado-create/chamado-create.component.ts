@@ -38,12 +38,29 @@ export class ChamadoCreateComponent implements OnInit {
     private toastService: ToastrService,
     private router: Router,
     private fb: FormBuilder,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    
   ) { this.criarFormulario(); }
 
   ngOnInit(): void {
+    this.setCurrentAction();
+    if (this.route.snapshot.url[1].path != 'create') {
+      this.findById();
+      if (this.route.snapshot.url[1].path == 'read') {
+        this.chamadoForm.disable();
+      }
+    }
     this.findAllClientes();
     this.findAllTecnicos();
+  }
+
+
+  submitForm() {
+
+    if (this.currentAction == "create")
+      this.create();
+    else 
+      this.update();
   }
 
   create(): void {
@@ -64,7 +81,14 @@ export class ChamadoCreateComponent implements OnInit {
       this.clientes = resposta;
     })
   }
+  findById() {
+    this.chamado.id = this.route.snapshot.paramMap.get('id');
+    this.chamadoService.findById(this.chamado.id).subscribe(resposta => {
+      this.chamado = resposta; 
+      this.chamadoForm.setValue(this.chamado)
 
+    });
+  }
   findAllTecnicos(): void {
     this.tecnicoService.findAll().subscribe(resposta => {
       this.tecnicos = resposta;
@@ -80,7 +104,16 @@ export class ChamadoCreateComponent implements OnInit {
     this.currentAction = this.route.snapshot.url[1].path
   }
 
+  update(): void {
 
+    this.chamado = this.chamadoForm.value
+      this.chamadoService.update(this.chamado).subscribe(resposta => {
+      this.toastService.success('Chamado atualizado com sucesso', 'Atualizar chamado');
+      this.router.navigate(['chamados']);
+    }, ex => {
+      this.toastService.error(ex.error.error);
+    })
+  }
   criarFormulario() {
     this.chamadoForm = this.fb.group({
       id: 0,
@@ -91,7 +124,9 @@ export class ChamadoCreateComponent implements OnInit {
       tecnico: [''],
       cliente: [''],
       nomeCliente: [''],
-      nomeTecnico: ['']
+      nomeTecnico: [''],
+      dataAbertura: [''],
+      dataFechamento: ['']
     })
   }
 
