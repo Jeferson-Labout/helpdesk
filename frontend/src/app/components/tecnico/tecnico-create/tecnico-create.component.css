@@ -49,3 +49,13 @@ mat-icon {
   opacity: .8;
 }
 
+@media (max-width: 768px) {
+
+  .container {
+    width: auto;
+    margin: auto;
+    padding: 1rem;
+    border-radius: .6rem;
+  }
+
+}

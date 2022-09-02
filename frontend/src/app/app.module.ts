@@ -42,6 +42,7 @@ import { ClienteCreateComponent } from './components/cliente/cliente-create/clie
 import { ChamadoListComponent } from './components/chamado/chamado-list/chamado-list.component';
 import { ChamadoCreateComponent } from './components/chamado/chamado-create/chamado-create.component';
 import { ButtonModule } from 'primeng/button';
+import { TableModule } from 'primeng/table';
 
 @NgModule({
   declarations: [
@@ -83,6 +84,7 @@ import { ButtonModule } from 'primeng/button';
     MatCardModule,
     DialogModule,
     ButtonModule,
+    TableModule,
     ToastrModule.forRoot({
       timeOut: 4000,
       closeButton: true,

@@ -39,19 +39,23 @@ export class ChamadoCreateComponent implements OnInit {
     private router: Router,
     private fb: FormBuilder,
     private route: ActivatedRoute,
-    
+
   ) { this.criarFormulario(); }
 
   ngOnInit(): void {
     this.setCurrentAction();
+
     if (this.route.snapshot.url[1].path != 'create') {
       this.findById();
       if (this.route.snapshot.url[1].path == 'read') {
         this.chamadoForm.disable();
       }
     }
+
     this.findAllClientes();
+
     this.findAllTecnicos();
+
   }
 
 
@@ -59,7 +63,7 @@ export class ChamadoCreateComponent implements OnInit {
 
     if (this.currentAction == "create")
       this.create();
-    else 
+    else
       this.update();
   }
 
@@ -84,7 +88,7 @@ export class ChamadoCreateComponent implements OnInit {
   findById() {
     this.chamado.id = this.route.snapshot.paramMap.get('id');
     this.chamadoService.findById(this.chamado.id).subscribe(resposta => {
-      this.chamado = resposta; 
+      this.chamado = resposta;
       this.chamadoForm.setValue(this.chamado)
 
     });
@@ -107,7 +111,7 @@ export class ChamadoCreateComponent implements OnInit {
   update(): void {
 
     this.chamado = this.chamadoForm.value
-      this.chamadoService.update(this.chamado).subscribe(resposta => {
+    this.chamadoService.update(this.chamado).subscribe(resposta => {
       this.toastService.success('Chamado atualizado com sucesso', 'Atualizar chamado');
       this.router.navigate(['chamados']);
     }, ex => {

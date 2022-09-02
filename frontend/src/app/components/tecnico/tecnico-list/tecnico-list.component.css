@@ -29,3 +29,26 @@ h1 {
 .delete {
   color: red;
 }
+
+.truncate-cell {
+  max-width: 60px;
+  /* feel free to include any other value */
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+@media (max-width: 768px) {
+
+  .container {
+    width: auto;
+    margin: auto;
+    padding: 1rem;
+    border-radius: .6rem;
+  }
+
+  .td {
+    display: none !important;
+  }
+
+}
