@@ -43,17 +43,14 @@ mat-radio-group {
    text-overflow: ellipsis;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 960px) {
 
    .container {
-      width: auto;
+      width: 100%;
       margin: auto;
       padding: 1rem;
       border-radius: .6rem;
    }
 
-   .td {
-      display: none !important;
-   }
-
+   
 }

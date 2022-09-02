@@ -17,7 +17,6 @@ img {
 }
 
 
-
 .sidenav i {
   margin-right: .6rem;
 }
@@ -26,4 +25,11 @@ img {
   margin: 1rem 0 0 1rem;
   background: rgb(2, 0, 36);
   background: linear-gradient(90deg, rgba(2, 0, 36, 1) 0%, rgba(144, 99, 249, 0.2329306722689075) 0%, rgba(33, 54, 237, 0.3561799719887955) 100%);
+}
+
+mat-drawer-content {
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
 }

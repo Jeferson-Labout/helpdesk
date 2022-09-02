@@ -39,3 +39,16 @@ p {
   margin-top: 3rem;
   opacity: .5;
 }
+
+
+@media (max-width: 960px) {
+
+  .container {
+     width: 100%;
+     margin: auto;
+     padding: 1rem;
+     border-radius: .6rem;
+  }
+
+  
+}
