@@ -1,7 +1,7 @@
 <div class="container mat-elevation-z8">
 
   <form [formGroup]="clienteForm" class="form">
-    <h1 class="full-widt">Cadastrar Cliente</h1>
+    <h1 class="full-widt">{{pageTitle}} Cliente {{clienteForm.get('nome').value}}</h1>
     <img class="full-width" src="assets/img/create-tec.svg" alt="">
 
     <section class="section">

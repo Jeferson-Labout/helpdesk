@@ -17,6 +17,7 @@ import { TecnicoService } from 'src/app/services/tecnico.service';
 export class ChamadoCreateComponent implements OnInit {
   currentAction: string;
   chamadoForm: FormGroup;
+  pageTitle: string;
   chamado: Chamado = {
 
   }
@@ -44,12 +45,25 @@ export class ChamadoCreateComponent implements OnInit {
 
   ngOnInit(): void {
     this.setCurrentAction();
-
+    if (this.route.snapshot.url[1].path == 'create') {
+      this.pageTitle = 'Cadastrar';
+    }
     if (this.route.snapshot.url[1].path != 'create') {
       this.findById();
+
       if (this.route.snapshot.url[1].path == 'read') {
         this.chamadoForm.disable();
       }
+
+    }
+
+    if (this.route.snapshot.url[1].path == 'update') {
+      this.pageTitle = 'Atualizando';
+
+    }
+    if (this.route.snapshot.url[1].path == 'read') {
+      this.pageTitle = 'Visualizando';
+
     }
 
     this.findAllClientes();

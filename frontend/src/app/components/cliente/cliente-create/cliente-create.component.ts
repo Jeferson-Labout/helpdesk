@@ -14,6 +14,7 @@ export class ClienteCreateComponent implements OnInit {
 
   currentAction: string;
   clienteForm: FormGroup;
+  pageTitle: string;
 
   cliente: Cliente = {
     perfis: []
@@ -34,9 +35,16 @@ export class ClienteCreateComponent implements OnInit {
 
   ngOnInit(): void {
     this.setCurrentAction();
+    if (this.route.snapshot.url[1].path == 'create') {
+      this.pageTitle = 'Cadastrar';
+    }
     if (this.route.snapshot.url[1].path != 'create') {
       this.findById();
+      if (this.route.snapshot.url[1].path == 'update') {
+        this.pageTitle = 'Atualizando';
+      }
       if (this.route.snapshot.url[1].path == 'delete') {
+        this.pageTitle = 'Excluido';
         this.clienteForm.disable();
       }
     }
@@ -53,7 +61,7 @@ export class ClienteCreateComponent implements OnInit {
 
     if (this.currentAction == "create")
       this.create();
-    else 
+    else
       this.update();
   }
 
@@ -131,7 +139,7 @@ export class ClienteCreateComponent implements OnInit {
   }
 
   private setCurrentAction() {
-    this.currentAction = this.route.snapshot.url[1].path   
+    this.currentAction = this.route.snapshot.url[1].path
   }
 
   criarFormulario() {

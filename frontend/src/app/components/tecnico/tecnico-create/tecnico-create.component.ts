@@ -14,6 +14,7 @@ export class TecnicoCreateComponent implements OnInit {
 
   currentAction: string;
   tecnicoForm: FormGroup;
+  pageTitle: string;
 
   tecnico: Tecnico = {
     perfis: []
@@ -34,9 +35,16 @@ export class TecnicoCreateComponent implements OnInit {
 
   ngOnInit(): void {
     this.setCurrentAction();
+    if (this.route.snapshot.url[1].path == 'create') {
+      this.pageTitle = 'Cadastrar';
+    }
     if (this.route.snapshot.url[1].path != 'create') {
       this.findById();
+      if (this.route.snapshot.url[1].path == 'update') {
+        this.pageTitle = 'Atualizando';
+      }
       if (this.route.snapshot.url[1].path == 'delete') {
+        this.pageTitle = 'Excluido';
         this.tecnicoForm.disable();
       }
     }
