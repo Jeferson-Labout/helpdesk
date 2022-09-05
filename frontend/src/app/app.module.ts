@@ -43,6 +43,9 @@ import { ChamadoListComponent } from './components/chamado/chamado-list/chamado-
 import { ChamadoCreateComponent } from './components/chamado/chamado-create/chamado-create.component';
 import { ButtonModule } from 'primeng/button';
 import { TableModule } from 'primeng/table';
+import { NgxChartsModule } from '@swimlane/ngx-charts';
+import { ChartModule } from 'primeng/chart';
+
 
 @NgModule({
   declarations: [
@@ -62,6 +65,7 @@ import { TableModule } from 'primeng/table';
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
+    NgxChartsModule,
     // Forms
     FormsModule,
     ReactiveFormsModule,
@@ -84,6 +88,7 @@ import { TableModule } from 'primeng/table';
     MatCardModule,
     DialogModule,
     ButtonModule,
+    ChartModule,
     TableModule,
     ToastrModule.forRoot({
       timeOut: 4000,
