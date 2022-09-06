@@ -56,13 +56,13 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 		String id = ((UserSS) authResult.getPrincipal()).getId().toString();
 		
 		String token = jwtUtil.generateToken(email);
-//		response.setHeader("access-control-expose-headers", "Authorization");
-//		response.setHeader("Authorization", "Bearer " + token);
+		response.setHeader("access-control-expose-headers", "Authorization");
+		response.setHeader("Authorization", "Bearer " + token);
 		Map<String, String> tokens = new HashMap<>();
 		tokens.put("access-control-expose-headers", "Authorization");
-		tokens.put("id",  id);	
-		tokens.put("token",  token);
-		tokens.put("email",  email);	
+		tokens.put("Id",  id);	
+		tokens.put("Token",  token);
+		tokens.put("Email",  email);	
 		response.setContentType(APPLICATION_JSON_VALUE);
 		new ObjectMapper().writeValue(response.getOutputStream(), tokens);
 	        
