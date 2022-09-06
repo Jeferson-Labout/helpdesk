@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { JwtHelperService } from '@auth0/angular-jwt';
+import { Observable } from 'rxjs';
 import { API_CONFIG } from '../config/api.config';
 import {Credenciais} from '../models/credenciais';
 
@@ -13,15 +14,16 @@ export class AuthService {
 
   constructor(private http: HttpClient) { }
 
-  authenticate(creds: Credenciais) {
-    return this.http.post(`${API_CONFIG.baseUrl}/login`, creds, {
-      observe: 'response',
-      responseType: 'text'
-    })
+  authenticate(creds: Credenciais): Observable<any> {
+    
+    return this.http.post(`${API_CONFIG.baseUrl}/login`, creds)
   }
 
-  successfulLogin(authToken: string) {
+  successfulLogin(authToken: string , email: string, id:string) {
     localStorage.setItem('token', authToken);
+    localStorage.setItem('email', email);
+    localStorage.setItem('id', id);
+    
   }
 
   isAuthenticated() {
