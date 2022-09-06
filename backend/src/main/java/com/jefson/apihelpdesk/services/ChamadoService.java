@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
+import javax.transaction.Transactional;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,12 +40,13 @@ public class ChamadoService {
 		return repository.findAll();
 	}
 
+	@Transactional
 	public Chamado create(@Valid ChamadoDTO objDTO) {
 		return repository.save(newChamado(objDTO));
 
 	}
 
-
+	@Transactional
 	public Chamado update(Integer id, @Valid ChamadoDTO objDTO) {
 		objDTO.setId(id);
 		Chamado oldObj = findById(id);
@@ -53,7 +55,7 @@ public class ChamadoService {
 		
 	}
 
-	
+	@Transactional
 	private Chamado newChamado(ChamadoDTO obj) {
 		Tecnico tecnico = tecnicoService.findById(obj.getTecnico());
 		Cliente cliente = clienteService.findById(obj.getCliente());
