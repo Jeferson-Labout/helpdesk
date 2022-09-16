@@ -9,6 +9,8 @@ import java.util.Optional;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -20,10 +22,11 @@ import com.jefson.apihelpdesk.repositories.TecnicoRepository;
 import com.jefson.apihelpdesk.services.exceptions.DataIntegrityViolationException;
 import com.jefson.apihelpdesk.services.exceptions.ObjectnotFoundException;
 
+
+
 @Service
 public class TecnicoService {
-
-	@Autowired
+    @Autowired
 	private TecnicoRepository repository;
 	@Autowired
 	private PessoaRepository pessoaRepository;
@@ -36,6 +39,14 @@ public class TecnicoService {
 
 	}
 
+	
+	public Page<TecnicoDTO> findAllDto(Pageable pageable) {
+		
+		Page<Tecnico> result = repository.findAll(pageable);
+		Page<TecnicoDTO> page = result.map(x -> new TecnicoDTO(x));
+		return page;
+	}
+	
 	public List<Tecnico> findAll() {
 		return repository.findAll();
 	}
