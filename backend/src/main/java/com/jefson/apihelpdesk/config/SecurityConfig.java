@@ -8,6 +8,7 @@ import org.springframework.core.env.Environment;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
@@ -26,8 +27,7 @@ import com.jefson.apihelpdesk.security.JWTUtil;
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
-	private static final String[] PUBLIC_MATCHERS = { "/h2-console/**" };
-
+	private static final String[] PUBLIC_MATCHERS = { "/h2-console/**", "/swagger-ui/**", "/v3/api-docs/**"};
 	@Autowired
 	private Environment env;
 	@Autowired
@@ -67,5 +67,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	public BCryptPasswordEncoder bCryptPasswordEncoder() {
 		return new BCryptPasswordEncoder();
 	}
+	
+	  //Configuracoes de recursos estaticos(js, css, imagens, etc.)
+	@Override
+    public void configure(WebSecurity web) throws Exception {
+        web.ignoring().antMatchers(PUBLIC_MATCHERS);
+    }
 
 }
