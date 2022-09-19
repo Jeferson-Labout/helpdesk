@@ -6,6 +6,8 @@ import java.util.Optional;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -34,6 +36,14 @@ public class ClienteService {
 
 	}
 
+	public Page<ClienteDTO> findAllDto(Pageable pageable) {
+
+		Page<Cliente> result = repository.findAll(pageable);
+		Page<ClienteDTO> page = result.map(x -> new ClienteDTO(x));
+		return page;
+	}
+	
+	
 	public List<Cliente> findAll() {
 		return repository.findAll();
 	}

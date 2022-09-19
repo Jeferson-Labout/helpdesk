@@ -5,6 +5,8 @@ import java.util.stream.Collectors;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -14,6 +16,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import com.jefson.apihelpdesk.domain.Cliente;
 import com.jefson.apihelpdesk.domain.dtos.ClienteDTO;
@@ -34,6 +37,13 @@ public class ClienteResource {
 	}
 
 	@GetMapping
+	public Page<ClienteDTO> findAllPagination(@RequestParam(value = "page", defaultValue = "0") Integer pagina,
+			@RequestParam(value = "size", defaultValue = "5") Integer tamanhoPagina) {
+		PageRequest pageRequest = PageRequest.of(pagina, tamanhoPagina);
+		return service.findAllDto(pageRequest);
+	}
+	
+	@GetMapping("all")
 	public ResponseEntity<java.util.List<ClienteDTO>> findAll() {
 		java.util.List<Cliente> list = service.findAll();
 		java.util.List<ClienteDTO> listDTO = list.stream().map(obj -> new ClienteDTO(obj)).collect(Collectors.toList());
