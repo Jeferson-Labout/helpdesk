@@ -44,10 +44,27 @@ public class ChamadoService {
 		Page<ChamadoDTO> page = result.map(x -> new ChamadoDTO(x));
 		return page;
 	}
+	
+	
+	public Page<ChamadoDTO> getstatus(Pageable pageable, Status status) {
+
+		Page<Chamado> result = repository.findByStatus(status, pageable);
+		Page<ChamadoDTO> page = result.map(x -> new ChamadoDTO(x));
+		return page;
+	}
+
+	
+	public Page<ChamadoDTO> getTitulo(Pageable pageable, String titulo) {
+
+		Page<Chamado> result = repository.findByTituloContainingIgnoreCase(titulo, pageable);
+		Page<ChamadoDTO> page = result.map(x -> new ChamadoDTO(x));
+		return page;
+	}
 
 	public List<Chamado> findAll() {
 		return repository.findAll();
 	}
+	
 
 	@Transactional
 	public Chamado create(@Valid ChamadoDTO objDTO) {

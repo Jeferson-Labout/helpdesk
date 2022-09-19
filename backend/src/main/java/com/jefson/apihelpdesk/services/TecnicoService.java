@@ -47,6 +47,7 @@ public class TecnicoService {
 		return page;
 	}
 	
+	
 	public List<Tecnico> findAll() {
 		return repository.findAll();
 	}
