@@ -46,7 +46,7 @@ public class ChamadoService {
 	}
 	
 	
-	public Page<ChamadoDTO> getstatus(Pageable pageable, Status status) {
+	public Page<ChamadoDTO> getStatus(Pageable pageable, Status status) {
 
 		Page<Chamado> result = repository.findByStatus(status, pageable);
 		Page<ChamadoDTO> page = result.map(x -> new ChamadoDTO(x));

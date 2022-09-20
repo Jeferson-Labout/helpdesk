@@ -22,12 +22,20 @@ import com.jefson.apihelpdesk.security.JWTAuthenticationFilter;
 import com.jefson.apihelpdesk.security.JWTAuthorizationFilter;
 import com.jefson.apihelpdesk.security.JWTUtil;
 
+import io.swagger.v3.oas.models.Components;
+import io.swagger.v3.oas.models.ExternalDocumentation;
+import io.swagger.v3.oas.models.OpenAPI;
+import io.swagger.v3.oas.models.info.Contact;
+import io.swagger.v3.oas.models.info.Info;
+import io.swagger.v3.oas.models.security.SecurityRequirement;
+import io.swagger.v3.oas.models.security.SecurityScheme;
+import io.swagger.v3.oas.models.servers.Server;
 
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
-	private static final String[] PUBLIC_MATCHERS = { "/h2-console/**", "/swagger-ui/**", "/v3/api-docs/**"};
+	private static final String[] PUBLIC_MATCHERS = { "/h2-console/**", "/swagger-ui/**", "/v3/api-docs/**" };
 	@Autowired
 	private Environment env;
 	@Autowired
@@ -67,11 +75,29 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	public BCryptPasswordEncoder bCryptPasswordEncoder() {
 		return new BCryptPasswordEncoder();
 	}
-	
-	  //Configuracoes de recursos estaticos(js, css, imagens, etc.)
+
+	// Configuracoes de recursos estaticos(js, css, imagens, etc.)
 	@Override
-    public void configure(WebSecurity web) throws Exception {
-        web.ignoring().antMatchers(PUBLIC_MATCHERS);
-    }
+	public void configure(WebSecurity web) throws Exception {
+		web.ignoring().antMatchers(PUBLIC_MATCHERS);
+	}
+
+	@Bean
+	public OpenAPI helpOpenAPIDefinition() {
+		final String securitySchemeName = "bearerAuth";
+
+		return new OpenAPI().addSecurityItem(new SecurityRequirement().addList(securitySchemeName))
+				.components(new Components().addSecuritySchemes(securitySchemeName,
+						new SecurityScheme().name(securitySchemeName).type(SecurityScheme.Type.HTTP).scheme("bearer")
+								.bearerFormat("JWT")))
+				.info(new Info().title("Swagger HelpDesk - OpenAPI 3.0").termsOfService("http://swagger.io/terms/")
+						.contact(new Contact().name("Jeferson Labout").email("jefson1989@gmail.com"))
+						.description("Aplicação desenvolvida.").version("v0.0.1"))
+				.externalDocs(new ExternalDocumentation().description("Documentação")
+						.url("http://localhost:8080/v3/api-docs"))
+				.addServersItem(new Server().url("http://localhost:8080").description("Homologação"))
+				.addServersItem(new Server().url("https://app-heldesk.herokuapp.com/").description("Produção"));
+
+	}
 
 }

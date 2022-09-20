@@ -18,11 +18,16 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
 import com.jefson.apihelpdesk.domain.Cliente;
 import com.jefson.apihelpdesk.domain.dtos.ClienteDTO;
 import com.jefson.apihelpdesk.services.ClienteService;
 
+import io.swagger.v3.oas.annotations.tags.Tag;
+
 @RestController
+@Tag(name = "Clientes", description = "Endpoint de Clientes")
+
 @RequestMapping(value = "/clientes")
 public class ClienteResource {
 
@@ -42,6 +47,21 @@ public class ClienteResource {
 		PageRequest pageRequest = PageRequest.of(pagina, tamanhoPagina);
 		return service.findAllDto(pageRequest);
 	}
+	
+	
+	  @GetMapping("/nome")
+	  public Page<ClienteDTO> getTitulo(
+	        @RequestParam(required = false) String nome,
+	        @RequestParam(value = "page", defaultValue = "0") Integer pagina,
+			@RequestParam(value = "size", defaultValue = "5") Integer tamanhoPagina
+			
+	      ) {
+
+		  
+		  PageRequest pageRequest = PageRequest.of(pagina, tamanhoPagina);
+			return service.getNome(pageRequest, nome);
+	  }
+	
 	
 	@GetMapping("all")
 	public ResponseEntity<java.util.List<ClienteDTO>> findAll() {

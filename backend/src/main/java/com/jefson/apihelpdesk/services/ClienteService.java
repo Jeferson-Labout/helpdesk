@@ -11,11 +11,11 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import com.jefson.apihelpdesk.domain.Pessoa;
 import com.jefson.apihelpdesk.domain.Cliente;
+import com.jefson.apihelpdesk.domain.Pessoa;
 import com.jefson.apihelpdesk.domain.dtos.ClienteDTO;
-import com.jefson.apihelpdesk.repositories.PessoaRepository;
 import com.jefson.apihelpdesk.repositories.ClienteRepository;
+import com.jefson.apihelpdesk.repositories.PessoaRepository;
 import com.jefson.apihelpdesk.services.exceptions.DataIntegrityViolationException;
 import com.jefson.apihelpdesk.services.exceptions.ObjectnotFoundException;
 
@@ -43,6 +43,16 @@ public class ClienteService {
 		return page;
 	}
 	
+	
+	public Page<ClienteDTO> getNome(Pageable pageable, String nome) {
+
+		Page<Cliente> result = repository.findByNomeContainingIgnoreCase(nome, pageable);
+		Page<ClienteDTO> page = result.map(x -> new ClienteDTO(x));
+		
+		return page;
+		
+	}
+
 	
 	public List<Cliente> findAll() {
 		return repository.findAll();

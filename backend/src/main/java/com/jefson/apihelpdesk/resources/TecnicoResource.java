@@ -25,7 +25,10 @@ import com.jefson.apihelpdesk.domain.Tecnico;
 import com.jefson.apihelpdesk.domain.dtos.TecnicoDTO;
 import com.jefson.apihelpdesk.services.TecnicoService;
 
+import io.swagger.v3.oas.annotations.tags.Tag;
+
 @RestController
+@Tag(name = "Tecnicos", description = "Endpoint de Tecnicos")
 @RequestMapping(value = "/tecnicos")
 public class TecnicoResource {
 
@@ -46,6 +49,22 @@ public class TecnicoResource {
 		return service.findAllDto(pageRequest);
 	}
 
+	
+	  @GetMapping("/nome")
+	  public Page<TecnicoDTO> getTitulo(
+	        @RequestParam(required = false) String nome,
+	        @RequestParam(value = "page", defaultValue = "0") Integer pagina,
+			@RequestParam(value = "size", defaultValue = "5") Integer tamanhoPagina
+			
+	      ) {
+
+		  
+		  PageRequest pageRequest = PageRequest.of(pagina, tamanhoPagina);
+			return service.getNome(pageRequest, nome);
+	  }
+	
+	
+	
 	@GetMapping("all")
 	public ResponseEntity<List<TecnicoDTO>> findAll() {
 		List<Tecnico> list = service.findAll();

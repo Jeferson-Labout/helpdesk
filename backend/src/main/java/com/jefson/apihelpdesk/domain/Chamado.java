@@ -1,6 +1,7 @@
 package com.jefson.apihelpdesk.domain;
 
 import java.io.Serializable;
+
 import java.time.LocalDate;
 
 import javax.persistence.Entity;
@@ -13,6 +14,8 @@ import javax.persistence.ManyToOne;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.jefson.apihelpdesk.domain.enums.Prioridade;
 import com.jefson.apihelpdesk.domain.enums.Status;
+
+
 @Entity
 public class Chamado implements Serializable {
 	private static final long serialVersionUID = 1L;

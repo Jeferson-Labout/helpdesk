@@ -48,6 +48,15 @@ public class TecnicoService {
 	}
 	
 	
+	public Page<TecnicoDTO> getNome(Pageable pageable, String nome) {
+
+		Page<Tecnico> result = repository.findByNomeContainingIgnoreCase(nome, pageable);
+		Page<TecnicoDTO> page = result.map(x -> new TecnicoDTO(x));
+		
+		return page;
+		
+	}
+	
 	public List<Tecnico> findAll() {
 		return repository.findAll();
 	}

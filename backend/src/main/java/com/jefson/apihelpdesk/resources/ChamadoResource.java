@@ -24,8 +24,13 @@ import com.jefson.apihelpdesk.domain.dtos.ChamadoDTO;
 import com.jefson.apihelpdesk.domain.enums.Status;
 import com.jefson.apihelpdesk.services.ChamadoService;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
+
 @RestController
+@Tag(name = "Chamados", description = "Endpoint de Chamados")
 @RequestMapping(value = "/chamados")
+
 public class ChamadoResource {
 
 	@Autowired
@@ -34,6 +39,7 @@ public class ChamadoResource {
 	
 	
 	@GetMapping(value = "/{id}")
+	@Operation(description = "Buscar Chamado pelo ID")
 	public ResponseEntity<ChamadoDTO> findById(@PathVariable Integer id){
 		Chamado obj = service.findById(id);
 		return ResponseEntity.ok().body(new ChamadoDTO(obj));
@@ -60,7 +66,7 @@ public class ChamadoResource {
 	      ) {
 
 		  PageRequest pageRequest = PageRequest.of(pagina, tamanhoPagina);
-			return service.getstatus(pageRequest, status);
+			return service.getStatus(pageRequest, status);
 	  }
 	  
 	  
@@ -72,7 +78,7 @@ public class ChamadoResource {
 			
 	      ) {
 
-		  System.out.println(titulo);
+		
 		  PageRequest pageRequest = PageRequest.of(pagina, tamanhoPagina);
 			return service.getTitulo(pageRequest, titulo);
 	  }
