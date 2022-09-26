@@ -1,0 +1,58 @@
+.card {
+ 
+  margin: 1rem auto;
+  background-color: aliceblue;
+}
+
+.dashboard{
+  width: 50%;
+  text-align: center;
+  left: 10rem;
+}
+
+img {
+  height: 20rem;
+}
+
+@media screen and (max-width: 600px) {
+  .card {
+    width: 140%;
+    margin-left:-2.5625rem;
+
+    img {
+      margin-top: 50px;
+      margin-bottom: 50px;
+      height: auto;
+    }
+  }
+}
+
+.mat-radio-button ~ .mat-radio-button {
+  margin-left: 16px;
+}
+.full-width {
+  width: 100%;
+}
+
+.half-width {
+  width: 50%;
+}
+
+.esp-top {
+  padding-top: 10px;
+}
+
+.esp-right {
+  padding-right: 10px;
+}
+
+.esp-bottom {
+  padding-bottom: 10px;
+}
+
+.esp-left {
+  padding-left: 10px;
+}
+.progress-bar{
+  background: #8396a0;
+}

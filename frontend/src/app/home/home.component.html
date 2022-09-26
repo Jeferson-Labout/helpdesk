@@ -1,0 +1,159 @@
+<!-- <mat-card class=" card mat-elevation-z8">
+  <mat-card-header>
+    <mat-card-title>Help Desk</mat-card-title>
+    <mat-card-subtitle>Sistema Help Desk</mat-card-subtitle>
+  </mat-card-header>
+
+  <img mat-card-image src="../assets/img/help.svg" alt="Image Home Help Desk">
+
+  <mat-card-content>
+    <p>
+      Olá! Seja bem vindo ao sistema Help Desk desenvolvido por mim no curso Desenvolvedor Full Stack.<br />
+      Esse é um sistema para gerenciamento de chamados simulando um simples Help Desk desenvolvido em Angular 13 e
+      Spring Boot 2. <br />O sistema está rodando na nuvem sendo o front na Netlify e o back na Heroku.<br />
+      O projeto tem como objetivo principal abordar os conceitos de aplicações SPAs, Autenticação e Autorização com
+      Tokens JWT e muito mais. O código fonte do projeto pode ser acessado clicando no link Github no menu lateral.
+      <br /><br /> Fique a vontade para testar o sistema e deixar sua sugestão.
+      <br /> At.te: Jeferson Ferreira Labout dos Santos
+    </p>
+   
+  </mat-card-content>
+
+</mat-card> -->
+
+<div class="c-main">
+    <mat-card-header>
+        <mat-card-title>Help Desk</mat-card-title>
+        <mat-card-subtitle>Sistema Help Desk</mat-card-subtitle>
+    </mat-card-header>
+    <div class="row mb-4">
+        <!--/.col quantidade venda-->
+        <div class="col-md-3">
+            <div class="card text-white bg-info">
+                <div class="card-body">
+                    <mat-icon>local_convenience_store</mat-icon>
+                    <h1>{{totalChamados}} chamados</h1>
+                    <h4>Quantidade de Chamados recebidos</h4>
+                    <div class="progress progress-white progress-thin mt-3">
+                        <div class="progress-bar" role="progressbar" style="width: 25%" aria-valuenow="25"
+                            aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--/.col valor total venda-->
+        <div class="col-md-3">
+            <div class="card text-white bg-success">
+                <div class="card-body">
+                    <mat-icon>av_timer</mat-icon>
+                    <h1>{{abertoChamados }} Em Abertos</h1>
+                    <h4>Total de Chamados em Abertos</h4>
+                    <div class="progress progress-white progress-thin mt-3">
+                        <div class="progress-bar" role="progressbar" style="width: 80%" aria-valuenow="25"
+                            aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--/.col total produtos cadastrados -->
+        <div class="col-md-3">
+            <div class="card text-white bg-warning">
+                <div class="card-body">
+                    <mat-icon>equalizer</mat-icon>
+                    <h1>{{andamentoChamados}} Em Andamento</h1>
+                    <h4>Total de Chamados em andamento</h4>
+                    <div class="progress progress-white progress-thin mt-3">
+                        <div class="progress-bar" role="progressbar" style="width: 18%" aria-valuenow="25"
+                            aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--/.col produtos ativos-->
+        <div class="col-md-3">
+            <div class="card text-white bg-danger">
+                <div class="card-body">
+                    <mat-icon>exit_to_app</mat-icon>
+                    <h1>{{fechadoChamados}} Fechados</h1>
+                    <h4>Total de Chamados em Fechados</h4>
+                    <div class="progress progress-white progress-thin mt-3">
+                        <div class="progress-bar" role="progressbar" style="width: 70%" aria-valuenow="25"
+                            aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--/.col-->
+    </div>
+    <!--/.row-->
+
+
+
+    <div class="div-container">
+        <mat-card class="mb-4">
+            <mat-card-header>
+                <mat-card-title>Dashboard</mat-card-title>
+                <mat-card-subtitle>ultimos atendimentos recebidos</mat-card-subtitle>
+            </mat-card-header>
+            <div class="mat-elevation-z8">
+                <mat-card>
+                    <!-- //inicio da tabela -->
+                    <p-table #dt [value]="chamados" dataKey="id" [rowHover]="true" [rows]="2"
+                        [showCurrentPageReport]="true" [rowsPerPageOptions]="[2,10,20,30,40,50]" [paginator]="false"
+                        currentPageReportTemplate="Mostrando de {first} a {last} de {totalRecords} itens"
+                        [filterDelay]="0" styleClass="p-datatable-striped">
+
+                        <ng-template pTemplate="header">
+                            <tr>
+                                <th pSortableColumn="id" style="width: 6rem">Código <p-sortIcon field="id"></p-sortIcon>
+                                </th>
+                                <th pSortableColumn="titulo" style="width: 8rem">Titulo <p-sortIcon field="titulo">
+                                    </p-sortIcon>
+
+                                <th pSortableColumn="nomeCliente" style="width: 8rem">Cliente <p-sortIcon
+                                        field="nomeCliente"></p-sortIcon>
+
+                                <th pSortableColumn="nomeTecnico" style="width: 8rem">Técnico <p-sortIcon
+                                        field="nomeTecnico"></p-sortIcon>
+
+                                <th pSortableColumn="dataAbertura" style="width: 8rem">Data de Abertura <p-sortIcon
+                                        field="dataAbertura">
+                                    </p-sortIcon>
+
+                                <th pSortableColumn="prioridade" style="width: 8rem">Prioridade<p-sortIcon
+                                        field="prioridade"></p-sortIcon>
+                                </th>
+                                <th pSortableColumn="status" style="width: 20rem">Status <p-sortIcon field="status">
+                                    </p-sortIcon>
+                                </th>
+
+                            </tr>
+                        </ng-template>
+
+                        <ng-template pTemplate="body" let-item>
+                            <tr class="p-selectable-row">
+                                <td> <span class="p-column-title">Código</span> {{item.id}} </td>
+                                <td> <span class="p-column-title">Titulo</span> {{item.titulo}} </td>
+                                <td> <span class="p-column-title">Cliente</span> {{item.nomeCliente}} </td>
+                                <td> <span class="p-column-title">Técnico</span> {{item.nomeTecnico}} </td>
+                                <td> <span class="p-column-title">Data de Abertura</span> {{item.dataAbertura}} </td>
+                                <td> <span class="p-column-title">Prioridade</span>
+                                    {{retornaPrioridade(item.prioridade)}} </td>
+                                <td> <span class="p-column-title">Status</span> {{retornaStatus(item.status)}} </td>
+
+                            </tr>
+                        </ng-template>
+
+                        <ng-template pTemplate="emptymessage">
+                            <tr>
+                                <td colspan="12" class="text-center">Nenhum Serviço encontrado.</td>
+                            </tr>
+                        </ng-template>
+                    </p-table>
+
+                </mat-card>
+            </div>
+        </mat-card>
+    </div>
+
+</div>

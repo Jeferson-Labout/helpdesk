@@ -1,10 +1,17 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-
+import { SidenavComponent } from './sidenav/sidenav.component';
+import { HomeComponent } from './home/home.component';
+import { HeaderComponent } from './header/header.component';
+import { ChamadoComponent } from './chamado/chamado.component';
+import { ClienteComponent } from './cliente/cliente.component';
+import { LoginComponent } from './login/login.component';
+import { TecnicoComponent } from './tecnico/tecnico.component';
+import { BodyComponent } from './body/body.component';
+import { AngularSvgIconModule } from 'angular-svg-icon';
 // Para trabalhar com formulários no Angular 12
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 
@@ -26,46 +33,47 @@ import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
 import { MatCardModule } from '@angular/material/card';
-//Componentes criados
-import { NavComponent } from './components/nav/nav.component';
-import { HomeComponent } from './components/home/home.component';
-import { HeaderComponent } from './components/header/header.component';
-import { TecnicoListComponent } from './components/tecnico/tecnico-list/tecnico-list.component';
-import { LoginComponent } from './components/login/login.component';
-import { ToastrModule } from 'ngx-toastr';
-import { AuthInterceptorProvider } from './interceptors/auth.interceptor';
-import { TecnicoCreateComponent } from './components/tecnico/tecnico-create/tecnico-create.component';
-import { NgxMaskModule } from 'ngx-mask';
-import { DialogModule } from 'primeng/dialog';
-import { ClienteListComponent } from './components/cliente/cliente-list/cliente-list.component';
-import { ClienteCreateComponent } from './components/cliente/cliente-create/cliente-create.component';
-import { ChamadoListComponent } from './components/chamado/chamado-list/chamado-list.component';
-import { ChamadoCreateComponent } from './components/chamado/chamado-create/chamado-create.component';
 import { ButtonModule } from 'primeng/button';
 import { TableModule } from 'primeng/table';
-import { NgxChartsModule } from '@swimlane/ngx-charts';
-import { ChartModule } from 'primeng/chart';
+import { DialogModule } from 'primeng/dialog';
+import { ToastrModule } from 'ngx-toastr';
+import { NgxMaskModule } from 'ngx-mask';
+import { AuthInterceptorProvider } from './interceptors/auth.interceptor';
+import { TecnicoCreateComponent } from './tecnico/tecnico-create/tecnico-create.component';
+import { ClienteCreateComponent } from './cliente/cliente-create/cliente-create.component';
+import { ChamadoCreateComponent } from './chamado/chamado-create/chamado-create.component';
+import { OverlayModule } from '@angular/cdk/overlay';
+import { CdkMenuModule } from '@angular/cdk/menu';
+import { MenuModule } from 'primeng/menu';
+import { RippleModule } from 'primeng/ripple';
+import { PaginacaoComponent } from './modalShared/paginacao/paginacao.component';
+import { NgxPaginationModule } from 'ngx-pagination';
+import { PaginationModule } from 'ngx-bootstrap/pagination';
+import {PaginatorModule} from 'primeng/paginator';
+import { ChartjsModule } from '@coreui/angular-chartjs';
+
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    NavComponent,
+    SidenavComponent,
     HomeComponent,
     HeaderComponent,
-    TecnicoListComponent,
-    ClienteListComponent,
+    ChamadoComponent,
+    ClienteComponent,
     LoginComponent,
+    TecnicoComponent,
+    BodyComponent,
     TecnicoCreateComponent,
     ClienteCreateComponent,
-    ChamadoListComponent,
-    ChamadoCreateComponent
+    ChamadoCreateComponent,
+    PaginacaoComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    NgxChartsModule,
     // Forms
     FormsModule,
     ReactiveFormsModule,
@@ -88,14 +96,23 @@ import { ChartModule } from 'primeng/chart';
     MatCardModule,
     DialogModule,
     ButtonModule,
-    ChartModule,
     TableModule,
+    OverlayModule,
+    MenuModule,
+    RippleModule,    
+    CdkMenuModule,
+    AngularSvgIconModule,
+    NgxPaginationModule,
+    PaginatorModule,
+    ChartjsModule,
+    PaginationModule.forRoot(),
     ToastrModule.forRoot({
       timeOut: 4000,
       closeButton: true,
       progressBar: true
     }),
     NgxMaskModule.forRoot()
+
   ],
   providers: [AuthInterceptorProvider],
   bootstrap: [AppComponent]

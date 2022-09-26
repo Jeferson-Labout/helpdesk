@@ -1,0 +1,246 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap');
+@import '~@angular/cdk/overlay-prebuilt.css';
+@import '~@angular/material/prebuilt-themes/deeppurple-amber.css';
+@import '~bootstrap/dist/css/bootstrap.min.css';
+@import 'ngx-toastr/toastr';
+@import '~primeicons/primeicons.css';
+@import '~primeng/resources/primeng.min.css';
+@import '~primeng/resources/themes/lara-light-blue/theme.css';
+
+
+// "node_modules/bootstrap/dist/css/bootstrap.min.css",
+// "./node_modules/@angular/material/prebuilt-themes/deeppurple-amber.css",
+// "src/styles.scss",
+// "node_modules/primeng/resources/themes/lara-light-blue/theme.css",
+// "node_modules/primeng/resources/primeng.min.css",
+// "node_modules/primeicons/primeicons.css"
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html,
+body {
+    height: 100vh;
+    margin: 0
+}
+
+body {
+    position: relative;
+    font-family: 'Roboto', sans-serif;
+    background: #f4f7fa;
+}
+
+table {
+    width: 100%;
+}
+
+
+.card {
+    display: flex;
+    flex-direction: column;
+    border-radius: .5rem;
+    background-color: #fff;
+    margin: 1.25rem 0 1.25rem 0;
+    box-shadow: 0 .25rem .5rem #e6edef;
+    color: #495057;
+
+    .card-head {
+        padding: 1rem 1.5rem;
+        border-bottom: 1px solid #edf1f7;
+        font-size: 1rem;
+        font-weight: 600;
+    }
+
+    .card-body {
+        padding: 1rem 1.5rem;
+    }
+}
+
+@media screen and (max-width: 960px) {
+
+    .p-datatable.p-datatable-striped .p-datatable-thead>tr>th,
+    .p-datatable.p-datatable-striped .p-datatable-tfoot>tr>td {
+        display: none !important;
+    }
+
+    .p-datatable.p-datatable-striped .p-datatable-tbody>tr {
+        box-shadow: rgba(0, 0, 0, 0.25) 0px 0.0625em 0.0625em, rgba(0, 0, 0, 0.25) 0px 0.125em 0.5em, rgba(255, 255, 255, 0.1) 0px 0px 0px 1px inset;
+        margin: 10px 0;
+        border-radius: 10px;
+
+    }
+
+    .p-datatable table {
+        border-collapse: separate !important;
+        border-spacing: 0 10px;
+    }
+
+    .p-datatable.p-datatable-striped .p-datatable-tbody>tr .p-table-hide {
+        display: none;
+    }
+
+    .p-datatable.p-datatable-striped .p-datatable-tbody>tr>td {
+        text-align: left;
+        border: 0 none !important;
+        width: 100% !important;
+        float: left;
+        clear: left;
+        border: 0 none;
+        padding: 0.2rem 1.5rem;
+        display: block;
+        justify-content: space-between !important;
+        font-size: 13px;
+    }
+
+    .p-datatable.p-datatable-striped .p-datatable-tbody>tr>td .p-column-title {
+        padding: 0.5rem;
+        min-width: 30%;
+        display: inline-block;
+        margin: -0.4rem 1rem -0.4rem -0.4rem;
+        font-weight: bold;
+        font-size: 13px;
+    }
+
+    .p-datatable.p-datatable-striped .p-datatable-tbody>tr>td .p-progressbar {
+        margin-top: 0.5rem;
+    }
+
+    .p-paginator-bottom {
+        padding: 0.5rem;
+        width: 100%;
+        border: 0 none;
+        font-size: 13px;
+
+        button {
+            width: auto !important;
+        }
+
+        .p-dropdown-trigger-icon {
+            width: auto !important;
+        }
+
+    }
+}
+
+.div-container {
+    margin: auto;
+}
+
+@media screen and (max-width:702px) {
+    .div-container {
+
+        width: 140%;
+        margin-left: -2.5625rem;
+        zoom: 0.83;
+
+
+    }
+
+    .row {
+        // a little css to set the width for material components to 100% in bootstrap grid
+        .mat-card {
+            display: flex !important;
+            width: 170%;
+        }
+    }
+  
+}
+
+// ---
+// CSS to make material design compatible to coreui & bootstrap
+// ---
+
+// material dialog has the z-index 1000
+.c-sidebar.c-sidebar-fixed {
+    z-index: 999;
+}
+
+.col.table,
+.col.mat-form-field {
+    width: 100%;
+}
+
+// grid integration for material
+.row {
+    // a little css to set the width for material components to 100% in bootstrap grid
+    .mat-card {
+        width: 100%;
+    }
+}
+
+
+
+.btn {
+    .mat-icon {
+        font-size: 1.09375rem;
+        vertical-align: middle;
+        width: initial;
+        height: initial;
+    }
+}
+
+// if the mat paginator gets smaller as 450px it will float the buttons
+// and break the design
+.mat-paginator {
+    min-width: 450px;
+}
+
+// menu material icon support
+.nav-icon.mat-icon {
+    font-size: 1.09375rem;
+    vertical-align: text-top;
+}
+.c-sidebar-nav-icon.mat-icon {
+    height: unset;
+}
+
+// ---
+// CSS to make material design compatible to coreui & bootstrap
+// ---
+
+// material dialog has the z-index 1000
+.c-sidebar.c-sidebar-fixed {
+    z-index: 999;
+}
+
+.col.table,
+.col.mat-form-field {
+    width: 100%;
+}
+
+// grid integration for material
+.row {
+    // a little css to set the width for material components to 100% in bootstrap grid
+    .mat-card {
+        width: 100%;
+    }
+}
+
+
+
+.btn {
+    .mat-icon {
+        font-size: 1.09375rem;
+        vertical-align: middle;
+        width: initial;
+        height: initial;
+    }
+}
+
+// if the mat paginator gets smaller as 450px it will float the buttons
+// and break the design
+.mat-paginator {
+    min-width: 450px;
+}
+
+// menu material icon support
+.nav-icon.mat-icon {
+    font-size: 1.09375rem;
+    vertical-align: text-top;
+}
+.c-sidebar-nav-icon.mat-icon {
+    height: unset;
+}
