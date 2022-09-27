@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "sidenav": {
+    "helpdesk": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -19,8 +19,8 @@
           "options": {
             "allowedCommonJsDependencies": [
               "lodash"
-           ],
-            "outputPath": "dist/sidenav",
+            ],
+            "outputPath": "dist/helpdesk",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -106,12 +106,8 @@
               "node_modules/primeng/resources/themes/lara-light-blue/theme.css",
               "node_modules/primeng/resources/primeng.min.css",
               "node_modules/primeicons/primeicons.css"
-             
             ],
-            "scripts": [
-             
-              
-            ]
+            "scripts": []
           }
         }
       }
