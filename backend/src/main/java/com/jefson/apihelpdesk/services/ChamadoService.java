@@ -17,9 +17,9 @@ import com.jefson.apihelpdesk.domain.Cliente;
 import com.jefson.apihelpdesk.domain.Tecnico;
 import com.jefson.apihelpdesk.domain.dtos.ChamadoDTO;
 import com.jefson.apihelpdesk.domain.enums.Prioridade;
+import com.jefson.apihelpdesk.domain.enums.Status;
 import com.jefson.apihelpdesk.repositories.ChamadoRepository;
 import com.jefson.apihelpdesk.services.exceptions.ObjectnotFoundException;
-import com.jefson.apihelpdesk.domain.enums.Status;
 
 @Service
 public class ChamadoService {
@@ -37,6 +37,28 @@ public class ChamadoService {
 		return obj.orElseThrow(() -> new ObjectnotFoundException("Objeto não encontrado! Código: " + id));
 
 	}
+	
+	  public long countChamados() {
+	        return repository.count();
+	    }
+
+		public long countChamadoAberto() {
+			return repository.countChamadoAberto();
+		}
+		
+
+		public long countChamadoAndamento() {
+			return repository.countChamadoAndamento();
+		}
+		
+		
+	    public List<Chamado> findTopByOrderByIdDesc() {
+	        return repository.findTop5ByOrderByIdDesc();
+	    }
+
+		public long countChamadoFechado() {
+			return repository.countChamadoFechado();
+		}
 	
 	public Page<ChamadoDTO> findAllDto(Pageable pageable) {
 
