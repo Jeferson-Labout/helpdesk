@@ -40,7 +40,7 @@ export class LoginComponent implements OnInit {
     this.service.authenticate(this.loginForm.value).subscribe(resposta => {
     
     
-      this.service.successfulLogin(resposta.token, resposta.email, resposta.id);
+      this.service.successfulLogin(resposta.token, resposta.email, resposta.id, resposta.perfil);
       
       this.router.navigate([''])
     }, () => {

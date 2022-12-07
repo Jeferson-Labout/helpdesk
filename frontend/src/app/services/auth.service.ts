@@ -22,10 +22,11 @@ export class AuthService {
 
   }
 
-  successfulLogin(authToken: string, email: string, id: string) {
+  successfulLogin(authToken: string, email: string, id: string, perfil :string) {
     localStorage.setItem('token', authToken);
     localStorage.setItem('email', email);
     localStorage.setItem('id', id);
+    localStorage.setItem('perfil', perfil);
 
 
   }

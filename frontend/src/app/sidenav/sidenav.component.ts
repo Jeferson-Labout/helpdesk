@@ -32,13 +32,17 @@ export class SidenavComponent implements OnInit {
   collapsed = false;
 
   screenWidth = 0;
+  perfil: string;
+  verificaPerfil: boolean;
 
   navData = navbarData;
   constructor() { }
 
   ngOnInit(): void {
     this.screenWidth = window.innerWidth;
-    
+    this.perfil = localStorage.getItem('perfil');
+
+    this.verificaPerfil = this.perfil.includes("TECNICO")
   }
 
   @HostListener('window:resize', ['$event'])
@@ -58,5 +62,5 @@ export class SidenavComponent implements OnInit {
     this.onTogglesSideNav.emit({ collapsed: this.collapsed, screenWidth: this.screenWidth });
   }
 
-  
+
 }

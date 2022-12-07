@@ -16,13 +16,23 @@ public class UserSS implements UserDetails{
 	private String email;
 	private String senha;
 	private Collection<? extends GrantedAuthority> authorities;
+	private String perfil;
 	
+	public String getPerfil() {
+		return perfil;
+	}
+
+	public void setPerfil(String perfil) {
+		this.perfil = perfil;
+	}
+
 	public UserSS(Integer id, String email, String senha, Set<Perfil> perfis) {
 		super();
 		this.id = id;
 		this.email = email;
 		this.senha = senha;
 		this.authorities = perfis.stream().map(x -> new SimpleGrantedAuthority(x.getDescricao())).collect(Collectors.toSet());
+		this.perfil = perfis.toString();
 	}
 
 	public Integer getId() {
