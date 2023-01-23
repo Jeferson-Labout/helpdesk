@@ -27,58 +27,54 @@
         <mat-card-subtitle>Sistema Help Desk</mat-card-subtitle>
     </mat-card-header>
     <div class="row mb-4">
-        <!--/.col quantidade venda-->
-        <div class="col-md-3">
+        <div class="col-12 col-sm-6 col-md-3">
             <div class="card text-white bg-info">
                 <div class="card-body">
                     <mat-icon>local_convenience_store</mat-icon>
                     <h1>{{totalChamados}} chamados</h1>
                     <h4>Quantidade de Chamados recebidos</h4>
                     <div class="progress progress-white progress-thin mt-3">
-                        <div class="progress-bar" role="progressbar" style="width: 25%" aria-valuenow="25"
-                            aria-valuemin="0" aria-valuemax="100"></div>
+                        <div class="progress-bar" role="progressbar" [style.width]="((porcentagensAbertos + porcentagensAndamento + porcentagensFechados) / totalChamados) * 100 + '%'" aria-valuenow="25"
+                            aria-valuemin="0" aria-valuemax="100">100 %</div>
                     </div>
                 </div>
             </div>
         </div>
-        <!--/.col valor total venda-->
-        <div class="col-md-3">
+        <div class="col-12 col-sm-6 col-md-3">
             <div class="card text-white bg-success">
-                <div class="card-body">
+                <div class="card-body" >
                     <mat-icon>av_timer</mat-icon>
                     <h1>{{abertoChamados }} Em Abertos</h1>
                     <h4>Total de Chamados em Abertos</h4>
                     <div class="progress progress-white progress-thin mt-3">
-                        <div class="progress-bar" role="progressbar" style="width: 80%" aria-valuenow="25"
-                            aria-valuemin="0" aria-valuemax="100"></div>
+                        <div class="progress-bar" role="progressbar" [style.width]="porcentagensAbertos + '%'" aria-valuenow="25"
+                            aria-valuemin="0" aria-valuemax="100" >{{porcentagensAbertos + '%'}}</div>
                     </div>
                 </div>
             </div>
         </div>
-        <!--/.col total produtos cadastrados -->
-        <div class="col-md-3">
+        <div class="col-12 col-sm-6 col-md-3">
             <div class="card text-white bg-warning">
                 <div class="card-body">
                     <mat-icon>equalizer</mat-icon>
                     <h1>{{andamentoChamados}} Em Andamento</h1>
                     <h4>Total de Chamados em andamento</h4>
                     <div class="progress progress-white progress-thin mt-3">
-                        <div class="progress-bar" role="progressbar" style="width: 18%" aria-valuenow="25"
-                            aria-valuemin="0" aria-valuemax="100"></div>
+                        <div class="progress-bar" role="progressbar" [style.width]="porcentagensAndamento + '%'" aria-valuenow="25"
+                            aria-valuemin="0" aria-valuemax="100">{{porcentagensAndamento + '%'}}</div>
                     </div>
                 </div>
             </div>
         </div>
-        <!--/.col produtos ativos-->
-        <div class="col-md-3">
+        <div class="col-12 col-sm-6 col-md-3">
             <div class="card text-white bg-danger">
                 <div class="card-body">
                     <mat-icon>exit_to_app</mat-icon>
                     <h1>{{fechadoChamados}} Fechados</h1>
                     <h4>Total de Chamados em Fechados</h4>
                     <div class="progress progress-white progress-thin mt-3">
-                        <div class="progress-bar" role="progressbar" style="width: 70%" aria-valuenow="25"
-                            aria-valuemin="0" aria-valuemax="100"></div>
+                        <div class="progress-bar" role="progressbar" [style.width]="porcentagensFechados + '%'" aria-valuenow="25"
+                            aria-valuemin="0" aria-valuemax="100">{{porcentagensFechados + '%'}}</div>
                     </div>
                 </div>
             </div>
