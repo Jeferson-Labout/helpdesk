@@ -8,3 +8,4 @@ export interface Tecnico{
   dataCriacao?:any;
 
 }
+

@@ -5,7 +5,10 @@ import { Cliente } from 'src/app/models/cliente';
 import { ClienteService } from 'src/app/services/cliente.service';
 import { QuantidadeItensPaginacao } from '../modalShared/quantidadeItensPaginacao';
 
-
+interface CampoPesquisa {
+  campo: keyof Cliente;
+  query: string;
+}
 @Component({
   selector: 'app-cliente',
   templateUrl: './cliente.component.html',
@@ -17,6 +20,17 @@ export class ClienteComponent implements OnInit {
   firstLastButtons = true; 
   totalElementos = 0;
   pagina = 0;
+  dadosPesquisa: any = {}; // Objeto para armazenar os dados de pesquisa
+  showFilter: boolean = false;
+  camposPesquisa: CampoPesquisa[] = [];
+  camposCliente: { label: string, value: keyof Cliente }[] = [
+    { label: 'Código', value: 'id' },
+    { label: 'Nome', value: 'nome' },
+    { label: 'CPF', value: 'cpf' },
+    { label: 'E-mail', value: 'email' },
+    { label: 'Data de Criação', value: 'dataCriacao' },
+    // Adicione mais campos conforme necessário
+  ];
   last = false;
   qdtPaginas = 0;
   itensgrid = 0;
@@ -47,6 +61,28 @@ export class ClienteComponent implements OnInit {
   //   })
   // }
 
+
+  toggleFilter() {
+    this.showFilter = !this.showFilter;
+  }
+
+  adicionarCampoPesquisa() {
+    const camposDisponiveis = this.camposCliente.filter(campo =>
+      !this.camposPesquisa.some(campoPesquisa => campoPesquisa.campo === campo.value)
+    );
+
+    // Verifica se há campos disponíveis
+    if (camposDisponiveis.length > 0) {
+      // Seleciona o primeiro campo disponível
+      const campoAleatorio = camposDisponiveis[0];
+      this.camposPesquisa.push({ campo: campoAleatorio.value, query: "" });
+    }
+    this.showFilter = true;
+  }
+
+  removerCampoPesquisa(index: number) {
+    this.camposPesquisa.splice(index, 1);
+  }
   findAllPaginada(pagina: number, tamanho: number) {
     this.service.findAllPaginada(pagina, tamanho).subscribe(resposta => {
       this.clientes = resposta.content
@@ -58,6 +94,30 @@ export class ClienteComponent implements OnInit {
 
     })
   }
+
+
+  pesquisar() {
+    // Reinicia os dados de pesquisa
+    this.dadosPesquisa = {};
+
+    // Adiciona os dados de pesquisa dos campos selecionados
+    this.camposPesquisa.forEach(campo => {
+      this.dadosPesquisa[campo.campo] = campo.query;
+    });
+    this.service.getNomePaginada(this.pagina, this.tamanho, this.dadosPesquisa).subscribe(resposta => {
+      this.clientes = resposta.content
+      this.totalElementos = resposta.totalElements;// pegar o total de elementos
+      this.pagina = resposta.number;// pegar o nu   
+      this.qdtPaginas = resposta.totalPages;// pegar o nu   
+      this.itensgrid = resposta.numberOfElements;// pegar o nu   
+      this.last = resposta.last;// pegar o nu  
+    })
+    // Aqui você pode enviar os dados de pesquisa para onde precisar, por exemplo, um serviço
+    console.log("Dados de pesquisa:", this.dadosPesquisa);
+  }
+
+
+  
 
   applyFilter(event: Event) {
 

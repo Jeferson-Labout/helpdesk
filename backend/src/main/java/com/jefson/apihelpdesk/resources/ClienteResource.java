@@ -3,7 +3,7 @@ package com.jefson.apihelpdesk.resources;
 import java.util.stream.Collectors;
 
 import javax.validation.Valid;
-
+import org.springframework.data.domain.Pageable;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -61,7 +61,19 @@ public class ClienteResource {
 		  PageRequest pageRequest = PageRequest.of(pagina, tamanhoPagina);
 			return service.getNome(pageRequest, nome);
 	  }
-	
+
+	  @GetMapping("/clientes")
+	    public Page<Cliente> buscarClientes(
+	            @RequestParam(value = "keyword", required = false) String keyword,
+	            @RequestParam(value = "page", defaultValue = "0") int page,
+	            @RequestParam(value = "size", defaultValue = "10") int size) {
+
+	     
+	        Pageable pageable = PageRequest.of(page, size);
+
+	     
+	        return service.buscarClientes(keyword, pageable);
+	    }
 	
 	@GetMapping("all")
 	public ResponseEntity<java.util.List<ClienteDTO>> findAll() {

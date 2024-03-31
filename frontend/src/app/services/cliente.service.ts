@@ -37,9 +37,21 @@ export class ClienteService {
       page=0;
      
     }
-    const params = new HttpParams().set('page', page.toString()).set('size', size.toString()).set('nome', nome.toString());
+    console.log(nome.nome);
+    const params = new HttpParams().set('page', page.toString()).set('size', size.toString()).set('nome', nome.nome.toString());
 
     return this.http.get<ClientePaginacaoViewModel>(`${API_CONFIG.baseUrl}/clientes/nome?${params.toString()}`);
+  }
+
+  buscarClientes(page: number, size: number, keyword?: string): Observable<ClientePaginacaoViewModel> {
+    // Criar parâmetros de consulta
+    let params = new HttpParams().set('page', page.toString()).set('size', size.toString());
+    if (keyword) {
+      params = params.set('keyword', keyword);
+    }
+
+    // Fazer a chamada HTTP
+    return this.http.get<ClientePaginacaoViewModel>(`${API_CONFIG.baseUrl}/clientes`, { params });
   }
 
   create(cliente: Cliente): Observable<Cliente> {

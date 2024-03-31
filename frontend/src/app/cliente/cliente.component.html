@@ -1,34 +1,57 @@
 <div class="div-container">
   <h1>Lista de Clientes</h1>
   <button routerLink="create" class="mat-elevation-z8 mb-5" mat-stroked-button color="primary">Novo Cliente</button>
-  <div class="row">
-     
-    <div class="col-md-11">
-       <mat-form-field appearance="standard">
-          <mat-label>Nome Cliente</mat-label>
-          <input matInput (keyup)="applyFilter($event)" placeholder="Ex. Nome Cliente" #input>
-       </mat-form-field>
-    </div>
-    <!-- <div class="col-md-1">
-       <label class="col-form-label-sm custom-select-label">Itens por página</label>
-       <select id="quantidadeRegistrosPagina" name="quantidadeRegistrosPagina" class="form-control form-control-sm"
-          [(ngModel)]="tamanho" (change)="mudarPagina($event)">
-          <option *ngFor="let item of pageSizeOptions" [ngValue]="item.quantidade" [selected]="10"> {{ item.quantidade
-             }} </option>
-       </select>
-    </div> -->
-    <div class="col-md-1">
-       <mat-form-field appearance="fill">
-          <mat-label>Itens por página</mat-label>
-          <select matNativeControl [(ngModel)]="tamanho" name="tamanho" (change)="mudarPagina($event)">
-             <option *ngFor="let item of pageSizeOptions" [ngValue]="item.quantidade" [selected]="10">
-              {{item.quantidade}}
-            </option>
-          </select>
-        </mat-form-field>
-    </div>
 
- </div>
+  <div class="row">
+    <div class="col-md-11">
+      <button (click)="adicionarCampoPesquisa()" class="btn btn-primary mr-2">Adicionar Campo de Pesquisa</button>
+    </div>
+    <div class="col-md-1">
+      <button (click)="pesquisar()" class="btn btn-primary">Pesquisar</button>
+    </div>
+  </div>
+
+  <div *ngFor="let campo of camposPesquisa; let i = index" class="row mt-2">
+    <div class="col-md-4">
+      <select [(ngModel)]="campo.campo" class="form-control">
+        <option *ngFor="let campoCliente of camposCliente" [ngValue]="campoCliente.value">{{ campoCliente.label }}</option>
+      </select>
+    </div>
+    <div class="col-md-5">
+      <ng-container [ngSwitch]="campo.campo">
+        <input *ngSwitchCase="'id'" type="number" [(ngModel)]="campo.query" class="form-control" placeholder="Pesquisar...">
+        <input *ngSwitchCase="'nome'" type="text" [(ngModel)]="campo.query" class="form-control" placeholder="Pesquisar...">
+        <input *ngSwitchCase="'cpf'" type="text" [(ngModel)]="campo.query" class="form-control" placeholder="Pesquisar...">
+        <input *ngSwitchCase="'email'" type="email" [(ngModel)]="campo.query" class="form-control" placeholder="Pesquisar...">
+        <input *ngSwitchCase="'dataCriacao'" type="date" [(ngModel)]="campo.query" class="form-control" placeholder="Pesquisar...">
+        <input *ngSwitchDefault type="text" [(ngModel)]="campo.query" class="form-control" placeholder="Pesquisar...">
+      </ng-container>
+    </div>
+    <div class="col-md-3">
+      <button (click)="removerCampoPesquisa(i)" class="btn btn-danger">Remover</button>
+    </div>
+  </div>
+  
+
+  <div class="row mt-3">
+    <div class="col-md-6">
+      <mat-form-field appearance="standard">
+        <mat-label>Nome Cliente</mat-label>
+        <input matInput (keyup)="applyFilter($event)" placeholder="Ex. Nome Cliente" #input>
+      </mat-form-field>
+    </div>
+    <div class="col-md-6">
+      <mat-form-field appearance="fill">
+        <mat-label>Itens por página</mat-label>
+        <select matNativeControl [(ngModel)]="tamanho" name="tamanho" (change)="mudarPagina($event)" class="form-control">
+          <option *ngFor="let item of pageSizeOptions" [ngValue]="item.quantidade" [selected]="10">
+            {{item.quantidade}}
+          </option>
+        </select>
+      </mat-form-field>
+    </div>
+  </div>
+
   <p-table #dt [value]="clientes" dataKey="id" [rowHover]="true" [rows]="2" [showCurrentPageReport]="true"
     [rowsPerPageOptions]="[2,10,20,30,40,50]" [paginator]="false"
     currentPageReportTemplate="Mostrando de {first} a {last} de {totalRecords} itens" [filterDelay]="0"
@@ -74,7 +97,6 @@
   </p-table>
 
   <app-paginacao [qdtPaginas]="qdtPaginas" [itensgrid]="itensgrid" [itemsPerPage]="tamanho" [last]="last"
-  [totalItems]="totalElementos" (onPaginate)="mudarPagina($event)">
-</app-paginacao>
-
+    [totalItems]="totalElementos" (onPaginate)="mudarPagina($event)">
+  </app-paginacao>
 </div>

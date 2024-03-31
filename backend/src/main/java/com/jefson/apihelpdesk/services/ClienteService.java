@@ -66,6 +66,23 @@ public class ClienteService {
 		return repository.save(newObj);
 	}
 
+	public Page<Cliente> buscarClientes(String keyword, Pageable pageable) {
+	    if (keyword != null && !keyword.isEmpty()) {
+	        try {
+	            // Tenta converter o valor da palavra-chave em um número
+	            int id = Integer.parseInt(keyword);
+	            // Se for um número, busca apenas pelo ID
+	            return repository.findByIdOrCpfOrEmailContainingIgnoreCase(id, keyword, keyword, pageable);
+	        } catch (NumberFormatException e) {
+	            // Se não puder ser convertido em número, busca por nome, cpf ou email
+	            return repository.findByNomeContainingIgnoreCaseOrCpfContainingIgnoreCaseOrEmailContainingIgnoreCase(keyword, keyword, keyword, pageable);
+	        }
+	    } else {
+	        return repository.findAll(pageable);
+	    }
+	}
+
+	
 	public Cliente update(Integer id, @Valid ClienteDTO objDTO) {
 		objDTO.setId(id);
 		objDTO.setSenha(encoder.encode(objDTO.getSenha()));

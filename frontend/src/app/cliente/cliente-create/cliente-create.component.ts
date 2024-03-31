@@ -50,7 +50,7 @@ export class ClienteCreateComponent implements OnInit {
     }
   }
   findById(): void {
-    this.cliente.id = this.route.snapshot.paramMap.get('id');
+    this.cliente.id = Number(this.route.snapshot.paramMap.get('id'));
     this.service.findById(this.cliente.id).subscribe(resposta => {
       this.cliente = resposta;
       this.cliente.perfis = [];
