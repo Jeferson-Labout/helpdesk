@@ -7,24 +7,31 @@ import { ChamadoService } from '../services/chamado.service';
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss']
 })
-export class HomeComponent implements OnInit {
+export class HomeComponent {
   chamados: Chamado[] = []
 
   totalChamados: number;
-  abertoChamados: number;
-  andamentoChamados: number;
+  abertoChamados: number ;
+  andamentoChamados: number ;
   fechadoChamados: number;
- 
-  constructor( private service: ChamadoService) { }
+  
+  porcentagenstotalChamados: number;
+  porcentagensAbertos:number;
+  porcentagensAndamento:number;
+  porcentagensFechados:number;
+
+
+
+  constructor( private service: ChamadoService) {this.ngOnInit() }
 
 
   ngOnInit(): void {
 
-    this. findTop5();
-    this.  findCount();
-    this.  findAberto();
-    this.  findAndamento();
-    this.  findFechado();
+    this.findTop5();
+    this.findCount();
+    this.findAberto();
+    this.findAndamento();
+    this.findFechado();
   }
 
   
@@ -37,6 +44,8 @@ export class HomeComponent implements OnInit {
       return 'ENCERRADO'
     }
   }
+
+  
 
   retornaPrioridade(prioridade: any): string {
     if (prioridade == '0') {
@@ -71,7 +80,7 @@ export class HomeComponent implements OnInit {
     
   findCount(): void {
     this.service.findCount().subscribe(resposta => {
-      this.totalChamados = resposta;
+      this.totalChamados = resposta;     
     
     })
   }
@@ -80,22 +89,23 @@ export class HomeComponent implements OnInit {
     this.service.findAberto().subscribe(resposta => {
       this.abertoChamados = resposta;
     
-    
+    this.porcentagensAbertos = Math.floor((this.abertoChamados / this.totalChamados) * 100);
     })
   }
     
   findAndamento(): void {
     this.service.findAndamento().subscribe(resposta => {
       this.andamentoChamados = resposta;
- 
+     this.porcentagensAndamento = Math.floor((this.andamentoChamados / this.totalChamados) * 100);
     
     })
   }
   findFechado(): void {
     this.service.findFechado().subscribe(resposta => {
       this.fechadoChamados = resposta;
-    
+      this.porcentagensFechados = Math.floor((this.fechadoChamados / this.totalChamados) * 100) ;
     })
+
   }
 
 
